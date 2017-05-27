@@ -9,7 +9,7 @@ namespace vega.Models
         public int Id{get; set;}
         [Required]
         [StringLength(255)]
-        public int name{get; set;}
+        public string name{get; set;}
         public ICollection<Model> Models{get; set;}
 
         public Make(){
