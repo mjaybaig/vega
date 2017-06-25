@@ -17,7 +17,6 @@ namespace vega.Controllers
         {
             this.mapper = mapper;
             this.context = context;
-
         }
         [HttpGet("/api/makes")]
         public async Task<IEnumerable<MakeResource>> GetMakes()
