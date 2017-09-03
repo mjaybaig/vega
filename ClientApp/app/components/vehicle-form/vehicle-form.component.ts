@@ -56,20 +56,19 @@ export class VehicleFormComponent implements OnInit {
       sources.push(this.vehicleService.getVehicle(this.vehicle.id))
     //end if
       Observable.forkJoin(sources).subscribe(data => {
-      this.features = data[0];
-      this.makes = data[1];
+        this.features = data[0];
+        this.makes = data[1];
 
-      if(this.vehicle.id){
-        this.setVehicle(data[2]);
-        this.populateModels();
-      }
-      //end if
-    },err => {
-      console.log(err);
-              if(err.status == 404)
-                this.router.navigate(['/home']);
-      }
-    );
+        if(this.vehicle.id){
+          this.setVehicle(data[2]);
+          this.populateModels();
+        }
+        //end if
+      },err => {
+        console.log(err);
+                if(err.status == 404)
+                  this.router.navigate(['/home']);
+      });
   }
 
   private setVehicle(v:Vehicle){
@@ -117,7 +116,15 @@ export class VehicleFormComponent implements OnInit {
     }
     else{
       this.vehicleService.create(this.vehicle)
-        .subscribe(x => console.log(x));
+        .subscribe(x => {
+          this.toastyService.success({
+            title: 'Success!',
+            msg: 'The vehicle was successfuly added',
+            theme: 'bootstrap',
+            showClose: true,
+            timeout: 5000
+          })
+        });
     }
   }
 
